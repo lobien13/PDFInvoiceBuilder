@@ -3,63 +3,56 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 
-# Función para crear un documento PDF con formato de factura
+# Function to create the PDF
 def crear_factura():
-    # Obtener la fecha y el número de factura del usuario
+    # Get the data
     fecha = input("Fecha (DD/MM/AAAA): ")
     numero_factura = input("Número de factura: ")
-
-    # Obtener información del cliente
     nombre_cliente = input("Nombre del cliente: ")
     direccion_cliente = input("Dirección del cliente: ")
-
-    # Obtener información de la empresa
     cif_empresa = input("CIF de la empresa: ")
-
-    # Obtener detalles de la factura
     concepto = input("Concepto de la factura: ")
     valor_factura = float(input("Valor de la factura: "))
 
-    # Calcular impuestos
+    # calculate taxes
     iva = valor_factura * 0.21  # 21% de IVA
     irpf = valor_factura * 0.15  # 15% de IRPF
     total_factura = valor_factura + iva - irpf
 
-    # Obtener forma de pago
     forma_pago = input("Forma de pago: ")
 
-    # Crear el documento PDF
+    # PDF 
     pdf_filename = f"factura_{numero_factura}.pdf"
     doc = SimpleDocTemplate(pdf_filename, pagesize=letter)
     styles = getSampleStyleSheet()
 
-    # Configurar el contenido del PDF
+    # Config PDF
     contenido = []
 
-    # Encabezado de la factura
+    #head
     encabezado = Paragraph("Factura", styles['Heading1'])
     contenido.append(encabezado)
 
     contenido.append(Spacer(1, 12))
 
-    # Fecha y número de factura
+     #Date
     contenido.append(Paragraph(f"Fecha: {fecha}", styles['Normal']))
     contenido.append(Paragraph(f"Número de Factura: {numero_factura}", styles['Normal']))
 
     contenido.append(Spacer(1, 12))
 
-    # Información del cliente
+    # Info
     contenido.append(Paragraph(f"Cliente: {nombre_cliente}", styles['Normal']))
     contenido.append(Paragraph(f"Dirección: {direccion_cliente}", styles['Normal']))
 
     contenido.append(Spacer(1, 12))
 
-    # Información de la empresa
+    # Info
     contenido.append(Paragraph(f"CIF de la Empresa: {cif_empresa}", styles['Normal']))
 
     contenido.append(Spacer(1, 12))
 
-    # Detalles de la factura
+    # Details
     contenido.append(Paragraph("Detalles:", styles['Heading2']))
     tabla_datos = []
     tabla_datos.append(["Concepto", "Valor", "IVA (21%)", "IRPF (15%)", "Total"])
@@ -79,13 +72,13 @@ def crear_factura():
 
     contenido.append(Spacer(1, 12))
 
-    # Forma de pago
+    
     contenido.append(Paragraph(f"Forma de Pago: {forma_pago}", styles['Normal']))
 
-    # Construir el PDF
+    # build the PDF
     doc.build(contenido)
 
     print(f"Se ha creado la factura en '{pdf_filename}'")
 
-# Llamar a la función para crear la factura
+
 crear_factura()
