@@ -15,6 +15,7 @@ def crear_factura():
     valor_factura = float(input("Valor de la factura: "))
     nombre_emisor = input("Nombre del emisor: ")  # Agregado
     nif_emisor = input("NIF del emisor: ")  # Agregado
+    numero_cuenta = input("Número de cuenta o IBAN: ")  # Agregado
 
     # calculate taxes
     iva = valor_factura * 0.21  # 21% de IVA
@@ -60,6 +61,11 @@ def crear_factura():
 
     contenido.append(Spacer(1, 12))
 
+    # Count number or IBAN
+    contenido.append(Paragraph(f"Número de cuenta o IBAN: {numero_cuenta}", styles['Normal']))  # Agregado
+
+    contenido.append(Spacer(1, 12))
+
     # Details
     contenido.append(Paragraph("Detalles:", styles['Heading2']))
     tabla_datos = []
@@ -80,7 +86,6 @@ def crear_factura():
 
     contenido.append(Spacer(1, 12))
 
-    
     contenido.append(Paragraph(f"Forma de Pago: {forma_pago}", styles['Normal']))
 
     # build the PDF
