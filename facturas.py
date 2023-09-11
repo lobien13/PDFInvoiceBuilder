@@ -13,6 +13,8 @@ def crear_factura():
     cif_empresa = input("CIF de la empresa: ")
     concepto = input("Concepto de la factura: ")
     valor_factura = float(input("Valor de la factura: "))
+    nombre_emisor = input("Nombre del emisor: ")  # Agregado
+    nif_emisor = input("NIF del emisor: ")  # Agregado
 
     # calculate taxes
     iva = valor_factura * 0.21  # 21% de IVA
@@ -29,13 +31,13 @@ def crear_factura():
     # Config PDF
     contenido = []
 
-    #head
+    # Head
     encabezado = Paragraph("Factura", styles['Heading1'])
     contenido.append(encabezado)
 
     contenido.append(Spacer(1, 12))
 
-     #Date
+    # Date
     contenido.append(Paragraph(f"Fecha: {fecha}", styles['Normal']))
     contenido.append(Paragraph(f"Número de Factura: {numero_factura}", styles['Normal']))
 
@@ -49,6 +51,12 @@ def crear_factura():
 
     # Info
     contenido.append(Paragraph(f"CIF de la Empresa: {cif_empresa}", styles['Normal']))
+
+    contenido.append(Spacer(1, 12))
+
+    # Emisor
+    contenido.append(Paragraph(f"Emisor: {nombre_emisor}", styles['Normal']))  # Agregado
+    contenido.append(Paragraph(f"NIF del Emisor: {nif_emisor}", styles['Normal']))  # Agregado
 
     contenido.append(Spacer(1, 12))
 
